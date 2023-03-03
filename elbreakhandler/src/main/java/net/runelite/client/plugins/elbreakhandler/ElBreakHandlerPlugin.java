@@ -353,7 +353,7 @@ public class ElBreakHandlerPlugin extends Plugin
 			logout = false;
 
 			Widget loginScreen = client.getWidget(WidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN);
-			Widget playButtonText = client.getWidget(WidgetID.LOGIN_CLICK_TO_PLAY_GROUP_ID, 87);
+			Widget playButtonText = client.getWidget(WidgetID.LOGIN_CLICK_TO_PLAY_GROUP_ID, 77);
 
 			if (playButtonText != null && playButtonText.getText().equals("CLICK HERE TO PLAY"))
 			{
@@ -492,7 +492,7 @@ public class ElBreakHandlerPlugin extends Plugin
 	{
 		if (state == ElBreakHandlerState.LOGIN_SCREEN)
 		{
-			Widget playButton = client.getWidget(WidgetID.LOGIN_CLICK_TO_PLAY_GROUP_ID, 78);
+			Widget playButton = client.getWidget(WidgetID.LOGIN_CLICK_TO_PLAY_GROUP_ID, 72);
 
 			if (playButton == null)
 			{

@@ -23,7 +23,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "3.0.0"
+version = "3.0.2"
 
 project.extra["PluginName"] = "El break handler"
 project.extra["PluginDescription"] = "Automatically takes breaks for you (?)"

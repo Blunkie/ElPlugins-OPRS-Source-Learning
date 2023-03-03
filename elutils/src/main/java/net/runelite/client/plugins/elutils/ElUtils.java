@@ -1227,7 +1227,7 @@ public class ElUtils extends Plugin
 		{
 			nextRunEnergy = getRandomIntBetweenRange(minEnergy, minEnergy + getRandomIntBetweenRange(0, randMax));
 		}
-		if (client.getEnergy() > nextRunEnergy ||
+		if ((client.getEnergy()/100) > nextRunEnergy ||
 				client.getVarbitValue(Varbits.RUN_SLOWED_DEPLETION_ACTIVE) != 0)
 		{
 			if (drinkStamPot(15 + getRandomIntBetweenRange(0, 30)))
@@ -1253,7 +1253,7 @@ public class ElUtils extends Plugin
 		{
 			nextRunEnergy = getRandomIntBetweenRange(minEnergy, minEnergy + getRandomIntBetweenRange(0, randMax));
 		}
-		if (client.getEnergy() > (minEnergy + getRandomIntBetweenRange(0, randMax)) ||
+		if ((client.getEnergy()/100) > (minEnergy + getRandomIntBetweenRange(0, randMax)) ||
 				client.getVarbitValue(Varbits.RUN_SLOWED_DEPLETION_ACTIVE) != 0)
 		{
 			if (drinkStamPot(potEnergy))
@@ -1277,16 +1277,70 @@ public class ElUtils extends Plugin
 		log.info("enabling run");
 		executorService.submit(() ->
 		{
-			targetMenu = new LegacyMenuEntry("Toggle Run", "", 1, 57, -1, 10485783, false);
+			targetMenu = new LegacyMenuEntry("Toggle Run", "", 1, 57, -1, 10485787, false);
 			delayMouseClick(runOrbBounds, getRandomIntBetweenRange(10, 250));
 		});
+	}
+
+	public boolean shouldStam(long sleepDelay){
+		log.info(String.valueOf((client.getEnergy()/100)<30));
+		WidgetItem stamWidget = null;
+		log.info(String.valueOf(client.getVar(Varbits.RUN_SLOWED_DEPLETION_ACTIVE)));
+		if((client.getEnergy()/100)<30 && client.getVar(Varbits.RUN_SLOWED_DEPLETION_ACTIVE)==0){
+			if(inventoryContains(12631)){
+				stamWidget = getInventoryWidgetItem(12631);
+				if(stamWidget!=null){
+					targetMenu = new LegacyMenuEntry("","",2,MenuAction.CC_OP.getId(),stamWidget.getIndex(),9764864,false);
+					if(stamWidget.getCanvasBounds()!=null){
+						delayMouseClick(stamWidget.getCanvasBounds().getBounds(),sleepDelay);
+					} else {
+						delayMouseClick(new Point(0,0),sleepDelay);
+					}
+					return true;
+				}
+			} else if(inventoryContains(12629)){
+				stamWidget = getInventoryWidgetItem(12629);
+				if(stamWidget!=null){
+					targetMenu = new LegacyMenuEntry("","",2,MenuAction.CC_OP.getId(),stamWidget.getIndex(),9764864,false);
+					if(stamWidget.getCanvasBounds()!=null){
+						delayMouseClick(stamWidget.getCanvasBounds().getBounds(),sleepDelay);
+					} else {
+						delayMouseClick(new Point(0,0),sleepDelay);
+					}
+					return true;
+				}
+			} else if(inventoryContains(12627)){
+				stamWidget = getInventoryWidgetItem(12627);
+				if(stamWidget!=null){
+					targetMenu = new LegacyMenuEntry("","",2,MenuAction.CC_OP.getId(),stamWidget.getIndex(),9764864,false);
+					if(stamWidget.getCanvasBounds()!=null){
+						delayMouseClick(stamWidget.getCanvasBounds().getBounds(),sleepDelay);
+					} else {
+						delayMouseClick(new Point(0,0),sleepDelay);
+					}
+					return true;
+				}
+			} else if(inventoryContains(12625)){
+				stamWidget = getInventoryWidgetItem(12625);
+				if(stamWidget!=null){
+					targetMenu = new LegacyMenuEntry("","",2,MenuAction.CC_OP.getId(),stamWidget.getIndex(),9764864,false);
+					if(stamWidget.getCanvasBounds()!=null){
+						delayMouseClick(stamWidget.getCanvasBounds().getBounds(),sleepDelay);
+					} else {
+						delayMouseClick(new Point(0,0),sleepDelay);
+					}
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	//Checks if Stamina enhancement is active and if stamina potion is in inventory
 	public WidgetItem shouldStamPot(int energy)
 	{
 		if (!getInventoryItems(List.of(ItemID.STAMINA_POTION1, ItemID.STAMINA_POTION2, ItemID.STAMINA_POTION3, ItemID.STAMINA_POTION4)).isEmpty()
-				&& client.getVarbitValue(Varbits.RUN_SLOWED_DEPLETION_ACTIVE) == 0 && client.getEnergy() < energy && !isBankOpen())
+				&& client.getVarbitValue(Varbits.RUN_SLOWED_DEPLETION_ACTIVE) == 0 && (client.getEnergy()/100) < energy && !isBankOpen())
 		{
 			return getInventoryWidgetItem(List.of(ItemID.STAMINA_POTION1, ItemID.STAMINA_POTION2, ItemID.STAMINA_POTION3,
 					ItemID.STAMINA_POTION4, ItemID.ENERGY_POTION1, ItemID.ENERGY_POTION2, ItemID.ENERGY_POTION3, ItemID.ENERGY_POTION4));
